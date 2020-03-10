@@ -1,4 +1,4 @@
-ARG ffmpeg_tag=4snapshot-vaapi
+ARG ffmpeg_tag=snapshot-vaapi
 FROM mdhiggins/sonarr-sma:build
 LABEL maintainer="RandomNinjaAtk"
 
