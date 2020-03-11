@@ -26,6 +26,9 @@ RUN \
 	chmod g+x /usr/local/bin/ffmpeg && \
 	chmod g+x /usr/local/bin/ffprobe
 
+RUN \
+	pip3 install -r /usr/local/sma/setup/requirements.txt
+
 # copy local files
 COPY root/ /
 
