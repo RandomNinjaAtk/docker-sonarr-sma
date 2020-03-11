@@ -1,6 +1,6 @@
 #!/usr/bin/with-contenv bash
 
-if [ ! -d "/config/sma/config" ]; then
+if [ ! -d "/config/sma" ]; then
 	mkdir -p "/config/sma" && \
 	chmod 0777 -R "/config/sma"
 fi
