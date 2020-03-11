@@ -1,4 +1,4 @@
-ARG ffmpeg_tag=snapshot-vaapi
+ARG ffmpeg_tag=4.2-vaapi
 FROM jrottenberg/ffmpeg:${ffmpeg_tag} as ffmpeg
 FROM mdhiggins/sonarr-sma:preview
 LABEL maintainer="RandomNinjaAtk"
