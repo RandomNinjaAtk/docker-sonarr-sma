@@ -1,4 +1,4 @@
-ARG ffmpeg_tag=snapshot-ubuntu
+ARG ffmpeg_tag=nvidia-ubuntu
 FROM jrottenberg/ffmpeg:${ffmpeg_tag} as ffmpeg
 FROM mdhiggins/sonarr-sma:preview
 LABEL maintainer="RandomNinjaAtk"
