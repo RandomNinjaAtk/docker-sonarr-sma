@@ -20,12 +20,15 @@ if [ ! -f "/usr/local/sma/config/autoProcess.ini" ]; then
 	ln -s "/config/sma/autoProcess.ini" "/usr/local/sma/config/autoProcess.ini"
 fi
 
-if [ ! -f "/config/sma/index.log" ]; then
-	touch "/config/sma/index.log"
-fi
 if [ -f "/var/log/sickbeard_mp4_automator/index.log" ]; then
 	rm "/var/log/sickbeard_mp4_automator/index.log"
 fi
+
+if [ -f "/config/sma/index.log" ]; then
+	rm "/config/sma/index.log"
+fi
+
+touch "/config/sma/index.log"
 ln -s "/config/sma/index.log" "/var/log/sickbeard_mp4_automator/index.log"
 
 exit 0
