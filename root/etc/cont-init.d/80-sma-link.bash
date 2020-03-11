@@ -7,7 +7,13 @@ fi
 
 if [ ! -f "/config/sma/config/autoProcess.ini" ]; then
 	cp "/usr/local/sma/config/autoProcess.ini.sample" "/config/sma/autoProcess.ini" && \
-	chmod 0666 "/config/sma"/*
+	chmod 0666 "/config/sma"/*  && \
+	sed -i "s/aac/libfdk_aac/g" "/config/sma/autoProcess.ini" && \
+	sed -i "s/ac3/eac3,ac3,libfdk_aac,aac,mp3/g" "/config/sma/autoProcess.ini" && \
+	sed -i "s/poster/thumb/g" "/config/sma/autoProcess.ini" && \
+	sed -i "s/languages = /languages = eng/g" "/config/sma/autoProcess.ini" && \
+	sed -i "s/default-language = /default-language = eng/g" "/config/sma/autoProcess.ini" && \
+	sed -i "s/burn-subtitles = /burn-subtitles = forced/g" "/config/sma/autoProcess.ini"
 fi
 
 if [ ! -f "/usr/local/sma/config/autoProcess.ini" ]; then
