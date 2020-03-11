@@ -13,7 +13,7 @@ if [ ! -f "/config/sma/config/autoProcess.ini" ]; then
 	sed -i "s/poster/thumb/g" "/config/sma/autoProcess.ini" && \
 	sed -i "s/languages = /languages = eng/g" "/config/sma/autoProcess.ini" && \
 	sed -i "s/default-language = /default-language = eng/g" "/config/sma/autoProcess.ini" && \
-	sed -i "s/burn-subtitles = /burn-subtitles = forced/g" "/config/sma/autoProcess.ini"
+	sed -i "s/burn-subtitles = False/burn-subtitles = forced/g" "/config/sma/autoProcess.ini"
 fi
 
 if [ ! -f "/usr/local/sma/config/autoProcess.ini" ]; then
