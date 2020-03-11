@@ -76,3 +76,4 @@ Located at `/config/sma/index.log` inside the container
 		* Set video codec to: `h264vaapi` or `h265vaapi`
 	* nvidia
 		* Set video codec to: `h264_nvenc` or `h265_nvenc`
+1. Make sure you have passed the correct device to the container, or these will not work...
