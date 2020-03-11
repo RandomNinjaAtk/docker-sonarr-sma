@@ -1,4 +1,4 @@
-ARG ffmpeg_tag=4.2-vaapi
+ARG ffmpeg_tag=snapshot-vaapi
 FROM jrottenberg/ffmpeg:${ffmpeg_tag} as ffmpeg
 FROM mdhiggins/sonarr-sma:preview
 LABEL maintainer="RandomNinjaAtk"
@@ -27,6 +27,7 @@ RUN \
 	chmod g+x /usr/local/bin/ffprobe
 
 RUN \
+	# install pip requirements
 	pip3 install -r /usr/local/sma/setup/requirements.txt
 
 # copy local files
