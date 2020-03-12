@@ -67,7 +67,7 @@ Access the webui at `<your-ip>:8989`, for more information check out [Sonarr](ht
 Located at `/config/sma/autoProcess.ini` inside the container
 
 ### Log Information
-Located at `/config/sma/index.log` inside the container
+Located at `/config/sma/sma.log` inside the container
 
 ### Hardware Acceleration
 
