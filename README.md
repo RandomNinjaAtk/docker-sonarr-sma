@@ -54,10 +54,11 @@ Access the webui at `<your-ip>:8989`, for more information check out [Sonarr](ht
 | Parameter | Value |
 | --- | --- |
 | On Grab | No |
-| On Download | Yes |
-| On Upgrade | Yes |
+| On Import | Yes |
 | On Upgrade | Yes |
 | On Rename | No |
+| On Health Issue | No |
+| Tags | leave blank |
 | Path | `/usr/local/sma/postSonarr.sh` |
 
 # SMA Information:
