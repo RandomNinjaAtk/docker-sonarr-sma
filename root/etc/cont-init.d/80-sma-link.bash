@@ -25,7 +25,7 @@ fi
 if [ -f "/config/sma/index.log" ]; then
 	rm "/config/sma/index.log"
 fi
-if [ -f "/config/sma/sama.log" ]; then
+if [ -f "/config/sma/sma.log" ]; then
 	rm "/config/sma/sma.log"
 fi
 
