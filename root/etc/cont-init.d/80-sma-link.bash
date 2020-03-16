@@ -1,11 +1,5 @@
 #!/usr/bin/with-contenv bash
 
-# create update SMA
-if [ "$SMA_UPDATE" = true ]; then
-	cd /usr/local/sma && \
-	git pull
-fi
-
 # create config directory
 if [ ! -d "/config/sma" ]; then
 	mkdir -p "/config/sma" && \
