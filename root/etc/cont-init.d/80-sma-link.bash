@@ -1,5 +1,11 @@
 #!/usr/bin/with-contenv bash
 
+# create update SMA
+if [ "$SMA_UPDATE" = true ]; then
+	cd /usr/local/sma && \
+	git pull
+fi
+
 # create config directory
 if [ ! -d "/config/sma" ]; then
 	mkdir -p "/config/sma" && \
@@ -37,5 +43,10 @@ ln -s "/config/sma/sma.log" "/var/log/sma.log" && \
 
 # set permissions
 chmod 0666 "/config/sma"/*
+
+# update from git
+if [[ "${SMA_UPDATE}" == "true" ]]; then
+    git -C ${SMA_PATH} pull origin master
+fi
 
 exit 0
