@@ -115,6 +115,18 @@ RUN \
 	rm -rf \
 		/var/lib/apt/lists/* \
 		/var/tmp/*
+		
+RUN \
+	# install dependancies
+	apt-get update -qq && \
+	apt-get install -qq -y \
+		cron && \
+	apt-get purge --auto-remove -y && \
+	apt-get clean
+
+	# setup cron
+	service cron start && \
+	echo "* * * * *   root   bash /etc/cont-init.d/33-sma-config-update.bash" >> "/etc/crontab"
 
 # copy local files
 COPY root/ /
