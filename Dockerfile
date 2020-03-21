@@ -4,6 +4,7 @@ LABEL maintainer="RandomNinjaAtk"
 
 ENV SMA_PATH /usr/local/sma
 ENV UPDATE_SMA FALSE
+ENV SMA_APP Sonarr
 # converter settings
 ENV CONVERTER_THREADS="0"
 ENV CONVERTER_OUTPUT_FORMAT="mp4"
