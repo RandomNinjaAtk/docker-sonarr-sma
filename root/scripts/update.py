@@ -59,6 +59,7 @@ def main():
     safeConfigParser.set("Metadata", "tag", os.environ.get("METADATA_TAG"))
     safeConfigParser.set("Metadata", "tag-language", os.environ.get("METADATA_TAG_LANGUAGE"))
     safeConfigParser.set("Metadata", "download-artwork", os.environ.get("METADATA_DOWNLOAD_ARTWORK"))
+    safeConfigParser.set("Metadata", "preserve-source-disposition", os.environ.get("METADATA_PRESERVE_SOURCE_DISPOSITION"))
     
     # Set Video Settings
     safeConfigParser.set("Video", "codec", os.environ.get("VIDEO_CODEC"))
