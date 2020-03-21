@@ -6,6 +6,11 @@ if [ ! -d "/config/sma" ]; then
 	chmod 0777 -R "/config/sma"
 fi
 
+# delete existing config
+if [ -f "/usr/local/sma/config/autoProcess.ini" ]; then
+	rm "/usr/local/sma/config/autoProcess.ini"
+fi
+
 # import new config, if does not exist
 if [ ! -f "/config/sma/autoProcess.ini" ]; then
 	cp "/usr/local/sma/setup/autoProcess.ini.sample" "/usr/local/sma/config/autoProcess.ini"
