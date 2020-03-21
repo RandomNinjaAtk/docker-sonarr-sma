@@ -119,8 +119,7 @@ RUN \
 RUN \
 	# install dependancies
 	apt-get update -qq && \
-	apt-get install -qq -y \
-		cron && \
+	apt-get install -qq -y cron && \
 	apt-get purge --auto-remove -y && \
 	apt-get clean
 
