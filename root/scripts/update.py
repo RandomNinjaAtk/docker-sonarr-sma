@@ -42,6 +42,8 @@ def main():
     # Set FFMPEG/FFProbe Paths
     safeConfigParser.set("Converter", "ffmpeg", "ffmpeg")
     safeConfigParser.set("Converter", "ffprobe", "ffprobe")
+    safeConfigParser.set("Converter", "output-format", os.environ.get("CONVERTER_OUTPUT_FORMAT"))
+    safeConfigParser.set("Converter", "output-extension", os.environ.get("CONVERTER_OUTPUT_EXTENSION"))
     safeConfigParser.set("Converter", "sort-streams", os.environ.get("CONVERTER_SORT_STREAMS"))
     safeConfigParser.set("Converter", "process-same-extensions", os.environ.get("CONVERTER_PROCESS_SAME_EXTENSIONS"))
     safeConfigParser.set("Converter", "force-convert", os.environ.get("CONVERTER_FORCE_CONVERT"))
