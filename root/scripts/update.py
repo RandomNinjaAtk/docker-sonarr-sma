@@ -31,7 +31,7 @@ def main():
     ssl = root.find("EnableSsl").text
     ssl = ssl.lower() in ["true", "yes", "t", "1", "y"] if ssl else False
     apikey = root.find("ApiKey").text
-    section = "Sonarr"
+    section = os.environ.get("SMA_APP"))
     if not section:
         logging.error("No Sonarr/Radarr specifying ENV variable")
         sys.exit(1)
