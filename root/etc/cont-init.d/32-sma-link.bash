@@ -8,23 +8,10 @@ fi
 
 # import new config, if does not exist
 if [ ! -f "/config/sma/autoProcess.ini" ]; then
-	cp "/usr/local/sma/setup/autoProcess.ini.sample" "/config/sma/autoProcess.ini"
-fi
-
-# link config file for use
-if [ ! -f "/usr/local/sma/config/autoProcess.ini" ]; then
-	ln -s "/config/sma/autoProcess.ini" "/usr/local/sma/config/autoProcess.ini"
+	cp "/usr/local/sma/setup/autoProcess.ini.sample" "/usr/local/sma/config/autoProcess.ini"
 fi
 
 # remove sickbeard_mp4_automator log if exists
-if [ -f "/var/log/sma.log" ]; then
-	rm "/var/log/sma.log"
-fi
-
-# remove sickbeard_mp4_automator log from sma config folder if exists
-if [ -f "/config/sma/index.log" ]; then
-	rm "/config/sma/index.log"
-fi
 if [ -f "/config/sma/sma.log" ]; then
 	rm "/config/sma/sma.log"
 fi
@@ -33,7 +20,7 @@ fi
 touch "/config/sma/sma.log" && \
 
 # link sma log file
-ln -s "/config/sma/sma.log" "/var/log/sma.log" && \
+ln -s "/config/sma/sma.log" "/usr/local/sma/config/sma.log" && \
 
 # set permissions
 chmod 0666 "/config/sma"/*
