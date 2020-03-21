@@ -48,7 +48,7 @@ def main():
     safeConfigParser.set("Converter", "sort-streams", os.environ.get("CONVERTER_SORT_STREAMS"))
     safeConfigParser.set("Converter", "process-same-extensions", os.environ.get("CONVERTER_PROCESS_SAME_EXTENSIONS"))
     safeConfigParser.set("Converter", "force-convert", os.environ.get("CONVERTER_FORCE_CONVERT"))
-    safeConfigParser.set("Converter", "postopts", os.environ.get("CONVERTER_PREOPTS"))
+    safeConfigParser.set("Converter", "preopts", os.environ.get("CONVERTER_PREOPTS"))
     safeConfigParser.set("Converter", "postopts", os.environ.get("CONVERTER_POSTOPTS"))
     
     # SET Permissions
