@@ -98,7 +98,13 @@ def main():
     safeConfigParser.set("Subtitle", "encoding", os.environ.get("SUBTITLE_ENCODING")
     safeConfigParser.set("Subtitle", "burn-subtitles", os.environ.get("SUBTITLE_BURN_SUBTITLES")
     safeConfigParser.set("Subtitle", "embed-subs", os.environ.get("SUBTITLE_EMBED_SUBS")
-    
+                         
+    # Set Plex Settings
+    safeConfigParser.set("Plex", "host", os.environ.get("PLEX_HOST")
+    safeConfigParser.set("Plex", "port", os.environ.get("PLEX_PORT")
+    safeConfigParser.set("Plex", "refresh", os.environ.get("PLEX_REFRESH")
+    safeConfigParser.set("Plex", "token", os.environ.get("PLEX_TOKEN")
+                         
     # Set values from config.xml
     safeConfigParser.set(section, "apikey", apikey)
     safeConfigParser.set(section, "ssl", str(ssl))
