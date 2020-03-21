@@ -21,6 +21,10 @@ if [ -f "/config/sma/sma.log" ]; then
 	rm "/config/sma/sma.log"
 fi
 
+if [ -f "/config/sma/sma.log" ]; then
+	rm "/usr/local/sma/config/sma.log"
+fi
+
 # create sma log file
 touch "/config/sma/sma.log" && \
 
