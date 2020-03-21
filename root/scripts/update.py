@@ -70,7 +70,7 @@ def main():
     safeConfigParser.set("Audio", "max-channels", os.environ.get("AUDIO_MAX_CHANNELS")
     safeConfigParser.set("Audio", "prefer-more-channels", os.environ.get("AUDIO_PREFER_MORE_CHANNELS")
     safeConfigParser.set("Audio", "copy-original", os.environ.get("AUDIO_COPY_ORIGINAL")
-    safeConfigParser.set("Audio", "first-track-of-language", os.environ.get("AUDIO_FIRST_TRACK_OF_LANGUAGE")
+    safeConfigParser.set("Audio", "first-stream-of-language", os.environ.get("AUDIO_FIRST_STREAM_OF_LANGUAGE")
     safeConfigParser.set("Audio", "max-bitrate", os.environ.get("AUDIO_MAX_BITRATE")
     safeConfigParser.set("Audio", "default-more-channels", os.environ.get("AUDIO_DEFAULT_MORE_CHANNELS")
         
@@ -80,7 +80,7 @@ def main():
     safeConfigParser.set("Universal Audio", "first-track-only", os.environ.get("UAUDIO_FIRST_TRACK_ONLY")
     safeConfigParser.set("Universal Audio", "move-last", os.environ.get("UAUDIO_MOVE_LAST")
     safeConfigParser.set("Universal Audio", "first-stream-only", os.environ.get("UAUDIO_FIRST_STREAM_ONLY")
-    safeConfigParser.set("Universal Audio", "move-after", os.environ.get(U"AUDIO_MOVE_AFTER")
+    safeConfigParser.set("Universal Audio", "move-after", os.environ.get("UAUDIO_MOVE_AFTER")
     
     # Set Subtitle Settings
     safeConfigParser.set("Subtitle", "codec", os.environ.get("SUBTITLE_CODEC")
