@@ -59,22 +59,14 @@ Access the webui at `<your-ip>:8989`, for more information check out [Sonarr](ht
 | On Rename | No |
 | On Health Issue | No |
 | Tags | leave blank |
-| Path | `/usr/local/sma/postSonarr.sh` |
+| Path | `/scripts/postSonarr.sh` |
 
 # SMA Information:
-
-### Config Location
-Located at `/config/sma/autoProcess.ini` inside the container
 
 ### Log Information
 Located at `/config/sma/sma.log` inside the container
 
 ### Hardware Acceleration
 
-1. After container start, locate `/config/sma/autoProcess.ini`
-1. Edit the `[Video]` options as specified below:
-	* vaapi
-		* Set video codec to: `h264vaapi` or `h265vaapi`
-	* nvidia
-		* Set video codec to: `h264_nvenc` or `h265_nvenc`
+1. Set "SMA: Video: codec" to: `h264vaapi` or `h265vaapi`
 1. Make sure you have passed the correct device to the container, or these will not work...
