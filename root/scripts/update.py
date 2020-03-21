@@ -42,12 +42,17 @@ def main():
     # Set FFMPEG/FFProbe Paths
     safeConfigParser.set("Converter", "ffmpeg", "ffmpeg")
     safeConfigParser.set("Converter", "ffprobe", "ffprobe")
+    safeConfigParser.set("Converter", "threads", os.environ.get("CONVERTER_THREADS"))
     safeConfigParser.set("Converter", "output-format", os.environ.get("CONVERTER_OUTPUT_FORMAT"))
     safeConfigParser.set("Converter", "output-extension", os.environ.get("CONVERTER_OUTPUT_EXTENSION"))
     safeConfigParser.set("Converter", "sort-streams", os.environ.get("CONVERTER_SORT_STREAMS"))
     safeConfigParser.set("Converter", "process-same-extensions", os.environ.get("CONVERTER_PROCESS_SAME_EXTENSIONS"))
     safeConfigParser.set("Converter", "force-convert", os.environ.get("CONVERTER_FORCE_CONVERT"))
+    safeConfigParser.set("Converter", "postopts", os.environ.get("CONVERTER_PREOPTS"))
     safeConfigParser.set("Converter", "postopts", os.environ.get("CONVERTER_POSTOPTS"))
+    
+    # SET Permissions
+    safeConfigParser.set("Permissions", "chmod", os.environ.get("PERMISSIONS_CHMOD"))
     
     # Set Metadata Settings
     safeConfigParser.set("Metadata", "relocate-moov", os.environ.get("METADATA_RELOCATE_MOV"))
@@ -60,6 +65,7 @@ def main():
     safeConfigParser.set("Video", "bitrate", os.environ.get("VIDEO_BITRATE"))
     safeConfigParser.set("Video", "crf", os.environ.get("VIDEO_CRF")
     safeConfigParser.set("Video", "crf-profiles", os.environ.get("VIDEO_CRF_PROFILES")
+    safeConfigParser.set("Video", "max-width", os.environ.get("VIDEO_MAX_WIDTH")
     safeConfigParser.set("Video", "profile", os.environ.get("VIDEO_PROFILE")
     safeConfigParser.set("Video", "max-level", os.environ.get("VIDEO_MAX_LEVEL")
     safeConfigParser.set("Video", "pix-fmt", os.environ.get("VIDEO_PIX_FMT")
@@ -68,31 +74,30 @@ def main():
     safeConfigParser.set("Audio", "codec", os.environ.get("AUDIO_CODEC")
     safeConfigParser.set("Audio", "languages", os.environ.get("AUDIO_LANGUAGES")
     safeConfigParser.set("Audio", "default-language", os.environ.get("AUDIO_DEFAULT_LANGUAGE")
+    safeConfigParser.set("Audio", "first-stream-of-language", os.environ.get("AUDIO_FIRST_STREAM_OF_LANGUAGE")
     safeConfigParser.set("Audio", "channel-bitrate", os.environ.get("AUDIO_CHANNEL_BITRATE")
+    safeConfigParser.set("Audio", "max-bitrate", os.environ.get("AUDIO_MAX_BITRATE")
     safeConfigParser.set("Audio", "max-channels", os.environ.get("AUDIO_MAX_CHANNELS")
     safeConfigParser.set("Audio", "prefer-more-channels", os.environ.get("AUDIO_PREFER_MORE_CHANNELS")
-    safeConfigParser.set("Audio", "copy-original", os.environ.get("AUDIO_COPY_ORIGINAL")
-    safeConfigParser.set("Audio", "first-stream-of-language", os.environ.get("AUDIO_FIRST_STREAM_OF_LANGUAGE")
-    safeConfigParser.set("Audio", "max-bitrate", os.environ.get("AUDIO_MAX_BITRATE")
     safeConfigParser.set("Audio", "default-more-channels", os.environ.get("AUDIO_DEFAULT_MORE_CHANNELS")
+    safeConfigParser.set("Audio", "copy-original", os.environ.get("AUDIO_COPY_ORIGINAL")
         
     # Set Universal Audio Settings
     safeConfigParser.set("Universal Audio", "codec", os.environ.get("UAUDIO_CODEC")
     safeConfigParser.set("Universal Audio", "channel-bitrate", os.environ.get("UAUDIO_CHANNEL_BITRATE")
-    safeConfigParser.set("Universal Audio", "first-track-only", os.environ.get("UAUDIO_FIRST_TRACK_ONLY")
-    safeConfigParser.set("Universal Audio", "move-last", os.environ.get("UAUDIO_MOVE_LAST")
     safeConfigParser.set("Universal Audio", "first-stream-only", os.environ.get("UAUDIO_FIRST_STREAM_ONLY")
     safeConfigParser.set("Universal Audio", "move-after", os.environ.get("UAUDIO_MOVE_AFTER")
-    
+    safeConfigParser.set("Universal Audio", "filter", os.environ.get("UAUDIO_FILTER")
+                         
     # Set Subtitle Settings
     safeConfigParser.set("Subtitle", "codec", os.environ.get("SUBTITLE_CODEC")
     safeConfigParser.set("Subtitle", "codec-image-based", os.environ.get("SUBTITLE_CODEC_IMAGE_BASED")
     safeConfigParser.set("Subtitle", "languages", os.environ.get("SUBTITLE_LANGUAGES")
     safeConfigParser.set("Subtitle", "default-language", os.environ.get("SUBTITLE_DEFAULT_LANGUAGE")
+    safeConfigParser.set("Subtitle", "first-stream-of-languag", os.environ.get("SUBTITLE_FIRST_STREAM_OF_LANGUAGE")
     safeConfigParser.set("Subtitle", "encoding", os.environ.get("SUBTITLE_ENCODING")
     safeConfigParser.set("Subtitle", "burn-subtitles", os.environ.get("SUBTITLE_BURN_SUBTITLES")
     safeConfigParser.set("Subtitle", "embed-subs", os.environ.get("SUBTITLE_EMBED_SUBS")
-    safeConfigParser.set("Subtitle", "first-stream-of-languag", os.environ.get("SUBTITLE_FIRST_STREAM_OF_LANGUAGE")
     
     # Set values from config.xml
     safeConfigParser.set(section, "apikey", apikey)
