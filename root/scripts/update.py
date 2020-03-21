@@ -49,9 +49,9 @@ def main():
     
     # Set Metadata Settings
     safeConfigParser.set("Metadata", "relocate-moov", os.environ.get("METADATA_RELOCATE_MOV"))
-    safeConfigParser.set("Metadata", "tag", os.environ.get("METADATATAG"))
-    safeConfigParser.set("Metadata", "tag-language", os.environ.get("METADATATAG_LANGUAGE"))
-    safeConfigParser.set("Metadata", "download-artwork", os.environ.get("METADATADOWNLOAD_ARTWORK"))
+    safeConfigParser.set("Metadata", "tag", os.environ.get("METADATA_TAG"))
+    safeConfigParser.set("Metadata", "tag-language", os.environ.get("METADATA_TAG_LANGUAGE"))
+    safeConfigParser.set("Metadata", "download-artwork", os.environ.get("METADATA_DOWNLOAD_ARTWORK"))
     
     # Set Video Settings
     safeConfigParser.set("Video", "codec", os.environ.get("VIDEO_CODEC"))
