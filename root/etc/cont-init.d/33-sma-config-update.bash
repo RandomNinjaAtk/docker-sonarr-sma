@@ -11,7 +11,7 @@ if [ -f "/config/config.xml" ]; then
 	# update autoprocess
 	python3 /scripts/update.py
 	# stop cron
-	service cron stop
+	service cron status > /dev/null && service cron stop
 fi
 
 exit $?
