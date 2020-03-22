@@ -87,8 +87,6 @@ RUN \
 	chmod g+w ${SMA_PATH}/config/sma.log && \
 	# install pip, venv, and set up a virtual self contained python environment
 	python3 -m pip install --user --upgrade pip && \
-	python3 -m pip install --user virtualenv && \
-	python3 -m virtualenv ${SMA_PATH}/venv && \
 	pip3 install -r ${SMA_PATH}/setup/requirements.txt
 
 RUN \
