@@ -145,7 +145,7 @@ def main():
     if os.environ.get("SUBTITLE_DEFAULT_LANGUAGE"):
         safeConfigParser.set("Subtitle", "default-language", os.environ.get("SUBTITLE_DEFAULT_LANGUAGE"))
     if os.environ.get("SUBTITLE_FIRST_STREAM_OF_LANGUAGE"):
-        safeConfigParser.set("Subtitle", "first-stream-of-languag", os.environ.get("SUBTITLE_FIRST_STREAM_OF_LANGUAGE"))
+        safeConfigParser.set("Subtitle", "first-stream-of-language", os.environ.get("SUBTITLE_FIRST_STREAM_OF_LANGUAGE"))
     if os.environ.get("SUBTITLE_ENCODING"):
         safeConfigParser.set("Subtitle", "encoding", os.environ.get("SUBTITLE_ENCODING"))
     if os.environ.get("SUBTITLE_BURN_SUBTITLES"):
