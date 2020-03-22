@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-python3 $SMA_PATH/postSonarr.py
+$SMA_PATH/venv/bin/python3 $SMA_PATH/postSonarr.py
