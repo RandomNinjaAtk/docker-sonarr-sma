@@ -112,8 +112,16 @@ def main():
         safeConfigParser.set("Audio", "prefer-more-channels", os.environ.get("AUDIO_PREFER_MORE_CHANNELS"))
     if os.environ.get("AUDIO_DEFAULT_MORE_CHANNELS"):
         safeConfigParser.set("Audio", "default-more-channels", os.environ.get("AUDIO_DEFAULT_MORE_CHANNELS"))
+    if os.environ.get("AUDIO_FILTER"):
+        safeConfigParser.set("Audio", "default-more-channels", os.environ.get("AUDIO_FILTER"))
+    if os.environ.get("AUDIO_SAMPLE_RATES"):
+        safeConfigParser.set("Audio", "default-more-channels", os.environ.get("AUDIO_SAMPLE_RATES"))
     if os.environ.get("AUDIO_COPY_ORIGINAL"):
         safeConfigParser.set("Audio", "copy-original", os.environ.get("AUDIO_COPY_ORIGINAL"))
+    if os.environ.get("AUDIO_AAC_ADTSTOASC"):
+        safeConfigParser.set("Audio", "copy-original", os.environ.get("AUDIO_AAC_ADTSTOASC"))
+    if os.environ.get("AUDIO_IGNORE_TREHD"):
+        safeConfigParser.set("Audio", "copy-original", os.environ.get("AUDIO_IGNORE_TREHD"))
         
     # Set Universal Audio Settings
     if os.environ.get("UAUDIO_CODEC"):
@@ -142,8 +150,22 @@ def main():
         safeConfigParser.set("Subtitle", "encoding", os.environ.get("SUBTITLE_ENCODING"))
     if os.environ.get("SUBTITLE_BURN_SUBTITLES"):
         safeConfigParser.set("Subtitle", "burn-subtitles", os.environ.get("SUBTITLE_BURN_SUBTITLES"))
+    if os.environ.get("SUBTITLE_DOWNLOAD_SUBS"):
+        safeConfigParser.set("Subtitle", "download-subs", os.environ.get("SUBTITLE_DOWNLOAD_SUBS"))
+    if os.environ.get("SUBTITLE_DOWNLOAD_HEARING_IMPAIRED_SUBS"):
+        safeConfigParser.set("Subtitle", "download-hearing-impaired-subs", os.environ.get("SUBTITLE_DOWNLOAD_HEARING_IMPAIRED_SUBS"))
+    if os.environ.get("SUBTITLE_DOWNLOAD_PROVIDERS"):
+        safeConfigParser.set("Subtitle", "download-providers", os.environ.get("SUBTITLE_DOWNLOAD_PROVIDERS"))
     if os.environ.get("SUBTITLE_EMBED_SUBS"):
         safeConfigParser.set("Subtitle", "embed-subs", os.environ.get("SUBTITLE_EMBED_SUBS"))
+    if os.environ.get("SUBTITLE_EMBED_IMAGE_SUBS"):
+        safeConfigParser.set("Subtitle", "embed-image-subs", os.environ.get("SUBTITLE_EMBED_IMAGE_SUBS"))
+    if os.environ.get("SUBTITLE_EMBED_ONLY_INTERNAL_SUBS"):
+        safeConfigParser.set("Subtitle", "embed-only-internal-subs", os.environ.get("SUBTITLE_EMBED_ONLY_INTERNAL_SUBS"))
+    if os.environ.get("embed-only-internal-subs"):
+        safeConfigParser.set("Subtitle", "ignore-embedded-subs", os.environ.get("SUBTITLE_IGNORE_EMBEDDED_SUBS"))
+    if os.environ.get("SUBTITLE_ATTACHMENT_CODEC"):
+        safeConfigParser.set("Subtitle", "attachment-codec", os.environ.get("SUBTITLE_ATTACHMENT_CODEC"))
                          
     # Set Plex Settings
     if os.environ.get("PLEX_HOST"):
