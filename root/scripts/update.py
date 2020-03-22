@@ -113,15 +113,15 @@ def main():
     if os.environ.get("AUDIO_DEFAULT_MORE_CHANNELS"):
         safeConfigParser.set("Audio", "default-more-channels", os.environ.get("AUDIO_DEFAULT_MORE_CHANNELS"))
     if os.environ.get("AUDIO_FILTER"):
-        safeConfigParser.set("Audio", "default-more-channels", os.environ.get("AUDIO_FILTER"))
+        safeConfigParser.set("Audio", "filter", os.environ.get("AUDIO_FILTER"))
     if os.environ.get("AUDIO_SAMPLE_RATES"):
-        safeConfigParser.set("Audio", "default-more-channels", os.environ.get("AUDIO_SAMPLE_RATES"))
+        safeConfigParser.set("Audio", "sample-rates", os.environ.get("AUDIO_SAMPLE_RATES"))
     if os.environ.get("AUDIO_COPY_ORIGINAL"):
         safeConfigParser.set("Audio", "copy-original", os.environ.get("AUDIO_COPY_ORIGINAL"))
     if os.environ.get("AUDIO_AAC_ADTSTOASC"):
-        safeConfigParser.set("Audio", "copy-original", os.environ.get("AUDIO_AAC_ADTSTOASC"))
+        safeConfigParser.set("Audio", "aac-adtstoasc", os.environ.get("AUDIO_AAC_ADTSTOASC"))
     if os.environ.get("AUDIO_IGNORE_TREHD"):
-        safeConfigParser.set("Audio", "copy-original", os.environ.get("AUDIO_IGNORE_TREHD"))
+        safeConfigParser.set("Audio", "ignore-truehd", os.environ.get("AUDIO_IGNORE_TREHD"))
         
     # Set Universal Audio Settings
     if os.environ.get("UAUDIO_CODEC"):
@@ -162,7 +162,7 @@ def main():
         safeConfigParser.set("Subtitle", "embed-image-subs", os.environ.get("SUBTITLE_EMBED_IMAGE_SUBS"))
     if os.environ.get("SUBTITLE_EMBED_ONLY_INTERNAL_SUBS"):
         safeConfigParser.set("Subtitle", "embed-only-internal-subs", os.environ.get("SUBTITLE_EMBED_ONLY_INTERNAL_SUBS"))
-    if os.environ.get("embed-only-internal-subs"):
+    if os.environ.get("SUBTITLE_IGNORE_EMBEDDED_SUBS"):
         safeConfigParser.set("Subtitle", "ignore-embedded-subs", os.environ.get("SUBTITLE_IGNORE_EMBEDDED_SUBS"))
     if os.environ.get("SUBTITLE_ATTACHMENT_CODEC"):
         safeConfigParser.set("Subtitle", "attachment-codec", os.environ.get("SUBTITLE_ATTACHMENT_CODEC"))
