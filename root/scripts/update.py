@@ -86,8 +86,8 @@ def main():
         safeConfigParser.set("Video", "crf-profiles", os.environ.get("VIDEO_CRF_PROFILES"))
     if os.environ.get("VIDEO_MAX_WIDTH"):
         safeConfigParser.set("Video", "max-width", os.environ.get("VIDEO_MAX_WIDTH"))
-    if os.environ.get("VIDEO_MAX_LEVEL"):
-        safeConfigParser.set("Video", "profile", os.environ.get("VIDEO_MAX_LEVEL"))
+    if os.environ.get("VIDEO_PROFILE"):
+        safeConfigParser.set("Video", "profile", os.environ.get("VIDEO_PROFILE"))
     if os.environ.get("VIDEO_MAX_LEVEL"):
         safeConfigParser.set("Video", "max-level", os.environ.get("VIDEO_MAX_LEVEL"))
     if os.environ.get("VIDEO_PIX_FMT"):
