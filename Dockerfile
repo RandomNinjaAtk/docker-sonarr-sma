@@ -1,4 +1,4 @@
-FROM jrottenberg/ffmpeg:snapshot-vaapi as ffmpeg
+FROM jrottenberg/ffmpeg:snapshot-nvidia as ffmpeg
 FROM linuxserver/sonarr:preview
 LABEL maintainer="RandomNinjaAtk"
 
