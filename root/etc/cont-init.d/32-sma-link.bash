@@ -33,5 +33,6 @@ ln -s "/config/sma/sma.log" "/usr/local/sma/config/sma.log" && \
 
 # set permissions
 chmod 0666 "/config/sma"/*
+chmod 0777 -R "/usr/local/sma"
 
 exit 0
