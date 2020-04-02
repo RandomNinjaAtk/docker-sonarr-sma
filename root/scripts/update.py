@@ -39,7 +39,7 @@ def main():
     safeConfigParser = configparser.ConfigParser()
     safeConfigParser.read(autoProcess)
 
-    # Set FFMPEG/FFProbe Paths
+    # Set Converter Settings
     safeConfigParser.set("Converter", "ffmpeg", "ffmpeg")
     safeConfigParser.set("Converter", "ffprobe", "ffprobe")
     if os.environ.get("CONVERTER_THREADS"):
