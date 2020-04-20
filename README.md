@@ -6,7 +6,7 @@
 
 [![sonarr](https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/sonarr-banner.png)](https://sonarr.tv/)
 
-This containers base image is provided by: [mdhiggins/sonarr-sma:preview](https://github.com/mdhiggins/sonarr-sma)
+This containers base image is provided by: [linuxserver/sonarr:preview](https://github.com/linuxserver/docker-sonarr)
 
 
 ## Supported Architectures
@@ -21,9 +21,7 @@ The architectures supported by this image are:
 
 | Tag | Description |
 | :----: | --- |
-| latest | Sonarr Preview releases - latest ffmpeg snapshot |
-| vaapi | Sonarr Preview releases - latest ffmpeg with vaapi HW acceleration |
-| nvidia | Sonarr Preview releases - latest ffmpeg with nvidia HW acceleration |
+| latest | Sonarr V3 + SMA + ffmpeg |
 
 ## Parameters
 
@@ -38,6 +36,7 @@ Container images are configured using parameters passed at runtime (such as thos
 | `-e UMASK_SET=022` | control permissions of files and directories created by Sonarr |
 | `-v /config` | Database and sonarr configs |
 | `-v /storage` | Location of TV and Downloads Library |
+| `-e UPDATE_SMA=FALSE` | TRUE = Enabled :: Uses SMA to process incoming video files, update your configuration at: /config/sma/autoProcess.ini |
 
 ## Application Setup
 
@@ -63,10 +62,13 @@ Access the webui at `<your-ip>:8989`, for more information check out [Sonarr](ht
 
 # SMA Information:
 
+### Config Information
+Located at `/config/sma/autoProcess.ini` inside the container
+
 ### Log Information
 Located at `/config/sma/sma.log` inside the container
 
 ### Hardware Acceleration
 
-1. Set "SMA: Video: codec" to: `h264vaapi` or `h265vaapi`
+1. Set "video codec" to: `h264vaapi` or `h265vaapi` in "/config/sma/autoProcess.ini"
 1. Make sure you have passed the correct device to the container, or these will not work...
