@@ -7,7 +7,7 @@ import configparser
 import xml.etree.ElementTree as ET
 
 xml = "/config/config.xml"
-autoProcess = "/config/scripts/configs/autoProcess.ini"
+autoProcess = "/config/sma/autoProcess.ini"
 
 
 def main():
