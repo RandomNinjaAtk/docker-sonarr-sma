@@ -36,7 +36,7 @@ Container images are configured using parameters passed at runtime (such as thos
 | `-e UMASK_SET=022` | control permissions of files and directories created by Sonarr |
 | `-v /config` | Database and sonarr configs |
 | `-v /storage` | Location of TV and Downloads Library |
-| `-e UPDATE_SMA=FALSE` | TRUE = Enabled :: Uses SMA to process incoming video files, update your configuration at: /config/sma/autoProcess.ini |
+| `-e UPDATE_SMA=FALSE` | TRUE = enabled :: Update SMA on container startup |
 
 ## Application Setup
 
