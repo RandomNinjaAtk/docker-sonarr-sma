@@ -72,5 +72,5 @@ Located at `/config/sma/sma.log` inside the container
 
 ### Hardware Acceleration
 
-1. Set "video codec" to: `h264vaapi` or `h265vaapi`in "/config/sma/autoProcess.ini"
+1. Set "video codec" to: `h264vaapi` or `h265vaapi` in "/config/sma/autoProcess.ini"
 1. Make sure you have passed the correct device to the container, or these will not work...
