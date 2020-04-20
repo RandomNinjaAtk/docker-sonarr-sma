@@ -6,7 +6,7 @@
 
 [![sonarr](https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/sonarr-banner.png)](https://sonarr.tv/)
 
-This containers base image is provided by: [mdhiggins/sonarr-sma:preview](https://github.com/mdhiggins/sonarr-sma)
+This containers base image is provided by: [linuxserver/sonarr:preview](https://github.com/linuxserver/docker-sonarr)
 
 
 ## Supported Architectures
@@ -21,9 +21,7 @@ The architectures supported by this image are:
 
 | Tag | Description |
 | :----: | --- |
-| latest | Sonarr Preview releases - latest ffmpeg snapshot |
-| vaapi | Sonarr Preview releases - latest ffmpeg with vaapi HW acceleration |
-| nvidia | Sonarr Preview releases - latest ffmpeg with nvidia HW acceleration |
+| latest | Sonarr V3 + SMA + ffmpeg |
 
 ## Parameters
 
