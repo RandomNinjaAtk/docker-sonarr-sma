@@ -15,6 +15,7 @@ fi
 # import new config, if does not exist
 if [ ! -f "/config/sma/autoProcess.ini" ]; then
 	cp "/usr/local/sma/setup/autoProcess.ini.sample" "/config/sma/autoProcess.ini" && \
+	bash "/scripts/update.bash"
 fi
 
 # create sma log file
