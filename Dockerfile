@@ -8,20 +8,20 @@ ENV SMA_APP Sonarr
 RUN \
 	echo "************ install dependencies ************" && \
 	echo "************ add repos for updated ffmpeg ************" && \
-	apt-get update -qq && \
 	apt-get install -y software-properties-common && \
-	apt-get update -qq && \
+	apt-get update && \
 	add-apt-repository ppa:savoury1/graphics -y && \
 	add-apt-repository ppa:savoury1/multimedia -y && \
 	add-apt-repository ppa:savoury1/ffmpeg4 -y && \
+	apt-get update && \
+	apt-get install -y ffmpeg  && \
 	echo "************ install packages ************" && \
-	apt-get update -qq && \
-	apt-get install -qq -y \
+	apt-get update && \
+	apt-get install -y \
 		git \
 		wget \
 		python3 \
 		python3-pip \
-		ffmpeg \
 		cron && \
 	apt-get purge --auto-remove -y && \
 	apt-get clean && \
