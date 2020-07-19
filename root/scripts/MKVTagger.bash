@@ -2,6 +2,7 @@
 apikey="$(grep "<ApiKey>" /config/config.xml | sed "s/\  <ApiKey>//;s/<\/ApiKey>//")"
 SonarrUrl="http://127.0.0.1:8989"
 scriptpath="/config/scripts"
+sleep 5
 exec &>> "$scriptpath/MKVTagger.log"
 
 sonarrseriesid="$sonarr_series_id"
