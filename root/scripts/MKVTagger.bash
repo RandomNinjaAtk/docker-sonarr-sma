@@ -1,14 +1,11 @@
 #!/usr/bin/env bash
 apikey="$(grep "<ApiKey>" /config/config.xml | sed "s/\  <ApiKey>//;s/<\/ApiKey>//")"
 SonarrUrl="http://127.0.0.1:8989"
-scriptpath="/config/sma"
-echo "$apikey"
-# exec &>> "$scriptpath/MKVTagger.log"
+scriptpath="/config/scripts"
+exec &>> "$scriptpath/MKVTagger.log"
 
 sonarrseriesid="$sonarr_series_id"
-sonarrseriesid=573
 sonarrepisodefileid="$sonarr_episodefile_id"
-sonarrepisodefileid=59319
 sonarrseriesdata="$(curl -s --header "X-Api-Key:"${apikey} --request GET  "$SonarrUrl/api/v3/series/$sonarrseriesid")"
 sonarrepisodedata="$(curl -s --header "X-Api-Key:"${apikey} --request GET  "$SonarrUrl/api/v3/episode?seriesId=$sonarrseriesid" | jq -r ".[] | select(.episodeFileId==$sonarrepisodefileid)")"
 sonarrepisodefiledata="$(curl -s --header "X-Api-Key:"${apikey} --request GET  "$SonarrUrl/api/v3/episodefile/$sonarrepisodefileid")"
@@ -25,57 +22,60 @@ sonarrseriesgenre="$(echo "${sonarrseriesdata}" | jq -r ".genres | .[]" | head -
 sonarrepisodefile="$(echo "$sonarrepisodefiledata" | jq -r ".path")"
 sonarrepisodefilepath="$(dirname "$sonarrepisodefile")"
 sonarrepisodefilename="$(basename "$sonarrepisodefile")"
+sonarrepisodefilenamenoext="$(basename "$sonarrepisodefilename" .mkv)"
+sonarrepisodethumbnail="$sonarrepisodefilenamenoext-thumb.jpg"
 
-sonarrseries="$(echo "$sonarrseriesdata" | jq -r ".title")"
-sonarrseries="$(echo "$sonarrseriesdata" | jq -r ".title")"
-sonarrseries="$(echo "$sonarrseriesdata" | jq -r ".title")"
-
-echo "$sonarrseriesdata"
-echo "$sonarrepisodedata"
-echo "$sonarrepisodefiledata"
-echo "$sonarrepisodetitle"
-echo "$sonarrepisodenumber"
-echo "$sonarrepisodeseasonnumber"
-echo "$sonarrepisodeoverview"
-echo "$sonarrseriestitle"
-echo "$sonarrseriesyear"
-echo "$sonarrepisodefile"
-echo "$sonarrepisodefilename"
-echo "$sonarrepisodefilepath"
-echo "$sonarrseriesgenre"
-echo "$sonarrepisodeyear"
-echo "$sonarrseriesseasonepisodecount"
-
-test () {
 if [ ${sonarrepisodefile: -4} == ".mkv" ]; then
 	echo "Processing :: $sonarrseriestitle :: $sonarrepisodetitle"
 	mv "$sonarrepisodefilepath/$sonarrepisodefilename" "$sonarrepisodefilepath/temp.mkv"
-	ffmpeg -y \
-		-i "$sonarrepisodefilepath/temp.mkv" \
-		-c:v copy \
-		-c:a copy \
-		-c:s copy \
-		-metadata TITLE="${sonarrepisodetitle}" \
-		-metadata DATE_RELEASE="$sonarrepisodeyear" \
-		-metadata DATE="$sonarrepisodeyear" \
-		-metadata YEAR="$sonarrepisodeyear" \
-		-metadata GENRE="$sonarrseriesgenre" \
-		-metadata PART_NUMBER="$sonarrepisodenumber" \
-		-metadata TOTAL_PARTS="$sonarrseriesseasonepisodecount" \
-		-metadata ALBUM="$sonarrseriestitle, Season $sonarrepisodeseasonnumber" \
-		-metadata COMMENT="$sonarrepisodeoverview" \
+	if [ -f "$sonarrepisodefilepath/$sonarrepisodethumbnail" ]; then
+		cp "$sonarrepisodefilepath/$sonarrepisodethumbnail" "$sonarrepisodefilepath/cover.jpg"
+		ffmpeg -y \
+			-i "$sonarrepisodefilepath/temp.mkv" \
+			-c:v copy \
+			-c:a copy \
+			-c:s copy \
+			-metadata TITLE="${sonarrepisodetitle}" \
+			-metadata DATE_RELEASE="$sonarrepisodeyear" \
+			-metadata DATE="$sonarrepisodeyear" \
+			-metadata YEAR="$sonarrepisodeyear" \
+			-metadata GENRE="$sonarrseriesgenre" \
+			-metadata ALBUM="$sonarrseriestitle, Season $sonarrepisodeseasonnumber" \
+			-metadata COMMENT="$sonarrepisodeoverview" \
+			-attach "$sonarrepisodefilepath/cover.jpg" -metadata:s:t mimetype=image/jpeg \
 		"$sonarrepisodefilepath/$sonarrepisodefilename" &> /dev/null
+	else
+		ffmpeg -y \
+			-i "$sonarrepisodefilepath/temp.mkv" \
+			-c:v copy \
+			-c:a copy \
+			-c:s copy \
+			-metadata TITLE="${sonarrepisodetitle}" \
+			-metadata DATE_RELEASE="$sonarrepisodeyear" \
+			-metadata DATE="$sonarrepisodeyear" \
+			-metadata YEAR="$sonarrepisodeyear" \
+			-metadata GENRE="$sonarrseriesgenre" \
+			-metadata ALBUM="$sonarrseriestitle, Season $sonarrepisodeseasonnumber" \
+			-metadata COMMENT="$sonarrepisodeoverview" \
+		"$sonarrepisodefilepath/$sonarrepisodefilename" &> /dev/null
+	fi
 	if [ -f "$sonarrepisodefilepath/$sonarrepisodefilename" ]; then
-		rm "$sonarrepisodefilepath/temp.mkv"
+		if [ -f "$sonarrepisodefilepath/temp.mkv" ]; then
+			rm "$sonarrepisodefilepath/temp.mkv"
+		fi
+		if [ -f "$sonarrepisodefilepath/cover.jpg" ]; then
+			rm "$sonarrepisodefilepath/cover.jpg"
+		fi
 		echo "Processing :: $sonarrseriestitle :: $sonarrepisodetitle :: Updating File Statistics"
 		mkvpropedit "$sonarrepisodefilepath/$sonarrepisodefilename" --add-track-statistics-tags &> /dev/null
 		echo "Processing :: $sonarrseriestitle :: $sonarrepisodetitle :: Complete!"
 	else
 		echo "Processing :: $sonarrseriestitle :: $sonarrepisodetitle :: Failed!"
 		mv "$sonarrepisodefilepath/temp.mkv" "$sonarrepisodefilepath/$sonarrepisodefilename"
+		if [ -f "$sonarrepisodefilepath/cover.jpg" ]; then
+			rm "$sonarrepisodefilepath/cover.jpg"
+		fi
 	fi
 fi
-}
 
-test
 exit 0
