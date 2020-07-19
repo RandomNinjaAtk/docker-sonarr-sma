@@ -27,7 +27,7 @@ sonarrepisodefilenamenoext="$(basename "$sonarrepisodefilename" .mkv)"
 sonarrepisodethumbnail="$sonarrepisodefilenamenoext-thumb.jpg"
 
 if [ ${sonarrepisodefile: -4} == ".mkv" ]; then
-	echo "Processing :: $sonarrseriestitle :: $sonarrepisodetitle"
+	echo "Processing :: $sonarrseriestitle :: Season $sonarrepisodeseasonnumber :: Episode $sonarrepisodenumber :: $sonarrepisodetitle"
 	mv "$sonarrepisodefilepath/$sonarrepisodefilename" "$sonarrepisodefilepath/temp.mkv"
 	if [ -f "$sonarrepisodefilepath/$sonarrepisodethumbnail" ]; then
 		cp "$sonarrepisodefilepath/$sonarrepisodethumbnail" "$sonarrepisodefilepath/cover.jpg"
@@ -67,11 +67,11 @@ if [ ${sonarrepisodefile: -4} == ".mkv" ]; then
 		if [ -f "$sonarrepisodefilepath/cover.jpg" ]; then
 			rm "$sonarrepisodefilepath/cover.jpg"
 		fi
-		echo "Processing :: $sonarrseriestitle :: $sonarrepisodetitle :: Updating File Statistics"
+		echo "Processing :: $sonarrseriestitle :: Season $sonarrepisodeseasonnumber :: Episode $sonarrepisodenumber :: $sonarrepisodetitle :: Updating File Statistics"
 		mkvpropedit "$sonarrepisodefilepath/$sonarrepisodefilename" --add-track-statistics-tags &> /dev/null
-		echo "Processing :: $sonarrseriestitle :: $sonarrepisodetitle :: Complete!"
+		echo "Processing :: $sonarrseriestitle :: Season $sonarrepisodeseasonnumber :: Episode $sonarrepisodenumber :: $sonarrepisodetitle :: Complete!"
 	else
-		echo "Processing :: $sonarrseriestitle :: $sonarrepisodetitle :: Failed!"
+		echo "Processing :: $sonarrseriestitle :: Season $sonarrepisodeseasonnumber :: Episode $sonarrepisodenumber :: $sonarrepisodetitle :: Failed!"
 		mv "$sonarrepisodefilepath/temp.mkv" "$sonarrepisodefilepath/$sonarrepisodefilename"
 		if [ -f "$sonarrepisodefilepath/cover.jpg" ]; then
 			rm "$sonarrepisodefilepath/cover.jpg"
