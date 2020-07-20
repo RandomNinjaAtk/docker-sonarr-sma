@@ -35,9 +35,7 @@ if [ ${sonarrepisodefile: -4} == ".mkv" ]; then
 		cp "$sonarrepisodefilepath/$sonarrepisodethumbnail" "$sonarrepisodefilepath/cover.jpg"
 		ffmpeg -y \
 			-i "$sonarrepisodefilepath/temp.mkv" \
-			-c:v copy \
-			-c:a copy \
-			-c:s copy \
+			-c copy \
 			-metadata TITLE="${sonarrepisodetitle}" \
 			-metadata DATE_RELEASE="$sonarrepisodeyear" \
 			-metadata DATE="$sonarrepisodeyear" \
@@ -50,9 +48,7 @@ if [ ${sonarrepisodefile: -4} == ".mkv" ]; then
 	else
 		ffmpeg -y \
 			-i "$sonarrepisodefilepath/temp.mkv" \
-			-c:v copy \
-			-c:a copy \
-			-c:s copy \
+			-c copy \
 			-metadata TITLE="${sonarrepisodetitle}" \
 			-metadata DATE_RELEASE="$sonarrepisodeyear" \
 			-metadata DATE="$sonarrepisodeyear" \
