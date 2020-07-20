@@ -27,8 +27,10 @@ sonarrepisodefilenamenoext="$(basename "$sonarrepisodefilename" .mkv)"
 sonarrepisodethumbnail="$sonarrepisodefilenamenoext-thumb.jpg"
 
 if [ ${sonarrepisodefile: -4} == ".mkv" ]; then
-	echo "Processing :: $sonarrseriestitle :: Season $sonarrepisodeseasonnumber :: Episode $sonarrepisodenumber :: $sonarrepisodetitle"
+	echo "Processing :: $sonarrseriestitle :: Season $sonarrepisodeseasonnumber :: Episode $sonarrepisodenumber :: $sonarrepisodetitle :: Start"
+	echo "Processing :: $sonarrseriestitle :: Season $sonarrepisodeseasonnumber :: Episode $sonarrepisodenumber :: $sonarrepisodetitle :: Embedding metadata with ffmpeg..."
 	mv "$sonarrepisodefilepath/$sonarrepisodefilename" "$sonarrepisodefilepath/temp.mkv"
+	echo "========================START FFMPEG========================"
 	if [ -f "$sonarrepisodefilepath/$sonarrepisodethumbnail" ]; then
 		cp "$sonarrepisodefilepath/$sonarrepisodethumbnail" "$sonarrepisodefilepath/cover.jpg"
 		ffmpeg -y \
@@ -44,7 +46,7 @@ if [ ${sonarrepisodefile: -4} == ".mkv" ]; then
 			-metadata ALBUM="$sonarrseriestitle, Season $sonarrepisodeseasonnumber" \
 			-metadata COMMENT="$sonarrepisodeoverview" \
 			-attach "$sonarrepisodefilepath/cover.jpg" -metadata:s:t mimetype=image/jpeg \
-		"$sonarrepisodefilepath/$sonarrepisodefilename" &> /dev/null
+		"$sonarrepisodefilepath/$sonarrepisodefilename"
 	else
 		ffmpeg -y \
 			-i "$sonarrepisodefilepath/temp.mkv" \
@@ -58,8 +60,9 @@ if [ ${sonarrepisodefile: -4} == ".mkv" ]; then
 			-metadata GENRE="$sonarrseriesgenre" \
 			-metadata ALBUM="$sonarrseriestitle, Season $sonarrepisodeseasonnumber" \
 			-metadata COMMENT="$sonarrepisodeoverview" \
-		"$sonarrepisodefilepath/$sonarrepisodefilename" &> /dev/null
+		"$sonarrepisodefilepath/$sonarrepisodefilename"
 	fi
+	echo "========================STOP FFMPEG========================="	
 	if [ -f "$sonarrepisodefilepath/$sonarrepisodefilename" ]; then
 		if [ -f "$sonarrepisodefilepath/temp.mkv" ]; then
 			rm "$sonarrepisodefilepath/temp.mkv"
@@ -67,8 +70,10 @@ if [ ${sonarrepisodefile: -4} == ".mkv" ]; then
 		if [ -f "$sonarrepisodefilepath/cover.jpg" ]; then
 			rm "$sonarrepisodefilepath/cover.jpg"
 		fi
-		echo "Processing :: $sonarrseriestitle :: Season $sonarrepisodeseasonnumber :: Episode $sonarrepisodenumber :: $sonarrepisodetitle :: Updating File Statistics"
-		mkvpropedit "$sonarrepisodefilepath/$sonarrepisodefilename" --add-track-statistics-tags &> /dev/null
+		echo "Processing :: $sonarrseriestitle :: Season $sonarrepisodeseasonnumber :: Episode $sonarrepisodenumber :: $sonarrepisodetitle :: Updating File Statistics via mkvtoolnix (mkvpropedit)..."
+		echo "========================START MKVPROPEDIT========================"
+		mkvpropedit "$sonarrepisodefilepath/$sonarrepisodefilename" --add-track-statistics-tags
+		echo "========================STOP MKVPROPEDIT========================="	
 		echo "Processing :: $sonarrseriestitle :: Season $sonarrepisodeseasonnumber :: Episode $sonarrepisodenumber :: $sonarrepisodetitle :: Complete!"
 	else
 		echo "Processing :: $sonarrseriestitle :: Season $sonarrepisodeseasonnumber :: Episode $sonarrepisodenumber :: $sonarrepisodetitle :: Failed!"
