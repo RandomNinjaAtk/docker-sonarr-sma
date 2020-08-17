@@ -1,5 +1,9 @@
 
 # [RandomNinjaAtk/sonarr-sma](https://github.com/RandomNinjaAtk/docker-sonarr-sma)
+![Docker Build](https://img.shields.io/docker/cloud/automated/randomninjaatk/sonarr-sma?style=flat-square)
+![Docker Pulls](https://img.shields.io/docker/pulls/randomninjaatk/sonarr-sma?style=flat-square)
+![Docker Stars](https://img.shields.io/docker/stars/randomninjaatk/sonarr-sma?style=flat-square)
+[![Docker Hub](https://img.shields.io/badge/Open%20On-DockerHub-blue)](https://hub.docker.com/r/randomninjaatk/sonarr-sma)
 
 [Sonarr](https://sonarr.tv/) is a PVR for usenet and bittorrent users. It can monitor multiple RSS feeds for new episodes of your favorite shows and will grab, sort and rename them. It can also be configured to automatically upgrade the quality of files already downloaded when a better quality format becomes available.
 
