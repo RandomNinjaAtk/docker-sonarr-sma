@@ -15,6 +15,16 @@ if [ ! -f "/config/scripts/MKVTagger.bash" ]; then
 	cp "/scripts/MKVTagger.bash" "/config/scripts/MKVTagger.bash"
 fi
 
+# Remove existing script
+if [ -f "/config/scripts/SMA.bash" ]; then
+	rm "/config/scripts/SMA.bash"
+fi
+
+# import script
+if [ ! -f "/config/scripts/SMA.bash" ]; then
+	cp "/scripts/SMA.bash" "/config/scripts/SMA.bash"
+fi
+
 # set permissions
 chmod 0777 -R "/config/scripts"
 
