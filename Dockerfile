@@ -32,6 +32,9 @@ RUN \
 	echo "************ install pip dependencies ************" && \
 	python3 -m pip install --user --upgrade pip && \	
 	pip3 install -r ${SMA_PATH}/setup/requirements.txt && \
+	echo "************ install python packages ************" && \
+	python3 -m pip install --no-cache-dir -U \
+		yq && \
 	echo "************ setup cron ************" && \
 	service cron start && \
 	echo "* * * * *   root   bash /scripts/update.bash" >> "/etc/crontab"
