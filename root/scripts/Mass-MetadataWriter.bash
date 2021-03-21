@@ -207,7 +207,7 @@ for id in ${!sonarrseriesids[@]}; do
 		echo "    <season>$sonarrepisodeseasonnumber</season>" >> "$nfo"
 		echo "    <episode>$sonarrepisodenumber</episode>" >> "$nfo"
 		echo "    <plot>$sonarrepisodeoverview</plot>" >> "$nfo"
-		echo "    <runtime>$sonarrepisoderuntime</runtime>" >> "$nfo"
+		#echo "    <runtime>$sonarrepisoderuntime</runtime>" >> "$nfo"
 		if [ -f "$sonarrepisodefilenamethumb" ]; then
 			echo "    <thumb>${sonarrepisodefilenamenoext}-thumb.jpg</thumb>" >> "$nfo"
 		else
