@@ -25,6 +25,16 @@ if [ ! -f "/config/scripts/SMA.bash" ]; then
 	cp "/scripts/SMA.bash" "/config/scripts/SMA.bash"
 fi
 
+# Remove existing script
+if [ -f "/config/scripts/MetadataWriter.bash" ]; then
+	rm "/config/scripts/MetadataWriter.bash"
+fi
+
+# import script
+if [ ! -f "/config/scripts/MetadataWriter.bash" ]; then
+	cp "/scripts/MetadataWriter.bash" "/config/scripts/MetadataWriter.bash"
+fi
+
 # set permissions
 chmod 0777 -R "/config/scripts"
 
