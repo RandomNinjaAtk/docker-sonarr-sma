@@ -36,6 +36,7 @@ sonarrseriestitle="$(echo "$sonarrseriesdata" | jq -r ".title")"
 sonarrepisodefile="$(echo "$sonarrepisodefiledata" | jq -r ".path")"
 sonarrepisoderuntime="$(echo "$sonarrepisodefiledata" | jq -r ".mediaInfo.runTime")"
 sonarrepisoderuntime=${sonarrepisoderuntime:0:2}
+sonarrepisodefolderpath="$(dirname "$sonarrepisodefile")"
 sonarrepisodefilename="$(basename "$sonarrepisodefile")"
 sonarrepisodefilenamenoext="${sonarrepisodefilename%.*}"
 sonarrepisodefilenamethumb="${sonarrepisodefile%.*}-thumb.jpg"
@@ -170,7 +171,7 @@ if [ ! -f "$nfo" ]; then
 	fi
 fi
 
-nfo="${sonarrepisodefilenamenoext}.nfo"
+nfo="${sonarrepisodefolderpath}/${sonarrepisodefilenamenoext}.nfo"
 if [ -f "$nfo" ]; then
 	rm "$nfo"
 fi
