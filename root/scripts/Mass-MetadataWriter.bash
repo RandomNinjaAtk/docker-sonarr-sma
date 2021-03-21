@@ -90,17 +90,20 @@ for id in ${!sonarrseriesids[@]}; do
 		nfo="$sonarrshowpath/tvshow.nfo"
 
 		log "$mainprocessid of $sonarrseriesidscount :: Processing :: $sonarrseriestitle"
-		if cat "$nfo" | grep "tmdb" | read; then
-			sleep 0.01
-		else
-			touch -d "2 hours ago" "$nfo" 
-		fi
+		if [  -f "$nfo" ]; then
+			if cat "$nfo" | grep "tmdb" | read; then
+				sleep 0.01
+			else
+				touch -d "2 hours ago" "$nfo" 
+			fi
+		
 
-		if find "$nfo" -name "tvshow.nfo" -type f -mtime +30 | read; then
-			log "$mainprocessid of $sonarrseriesidscount :: Processing :: $sonarrseriestitle :: Show :: NFO detected, removing..."
-			rm "$nfo"
-		else
-			log "$mainprocessid of $sonarrseriesidscount :: Processing :: $sonarrseriestitle :: Show :: Detected NFO doesn't require update..." 
+			if find "$nfo" -name "tvshow.nfo" -type f -mtime +30 | read; then
+				log "$mainprocessid of $sonarrseriesidscount :: Processing :: $sonarrseriestitle :: Show :: NFO detected, removing..."
+				rm "$nfo"
+			else
+				log "$mainprocessid of $sonarrseriesidscount :: Processing :: $sonarrseriestitle :: Show :: Detected NFO doesn't require update..." 
+			fi
 		fi
 
 		if [ ! -f "$nfo" ]; then
