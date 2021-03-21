@@ -2,6 +2,7 @@
 apikey="$(grep "<ApiKey>" /config/config.xml | sed "s/\  <ApiKey>//;s/<\/ApiKey>//")"
 SonarrUrl="http://127.0.0.1:8989"
 themoviedbapikey="3b7751e3179f796565d88fdb2fcdf426"
+
 log () {
     m_time=`date "+%F %T"`
     echo $m_time" "$1
@@ -76,6 +77,12 @@ sonarrepisodethumb=$(echo "${themoviedbshowepisodedata}" | jq -r ".still_path")
 nfo="$sonarrshowpath/tvshow.nfo"
 
 log "Processing :: $sonarrseriestitle"
+if cat "$nfo" | grep "tmdb" | read; then
+	sleep 0.01
+else
+	touch -d "2 hours ago" "$nfo" 
+fi
+
 if find "$nfo" -name "tvshow.nfo" -type f -mtime +30 | read; then
 	log "Processing :: $sonarrseriestitle :: Show :: NFO detected, removing..."
 	rm "$nfo"
