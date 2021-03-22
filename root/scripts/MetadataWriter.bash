@@ -173,7 +173,7 @@ if [ ! -f "$nfo" ]; then
 		echo "    <namedseason number=\"$seasonnumbere\">$seasonname</namedseason>" >> "$nfo"
 	done
 	echo "</tvshow>" >> "$nfo"
-	tidy -w 150 -i -m -xml "$nfo" &>/dev/null
+	tidy -w 2000 -i -m -xml "$nfo" &>/dev/null
 	if [ -f "$nfo" ]; then
 		log "Processing :: $sonarrseriestitle :: Show :: Writing Complete"
 	fi
@@ -253,6 +253,6 @@ for id in ${!sonarrepisodeguestcast[@]}; do
 	echo "	</actor>" >> "$nfo"
 done
 echo "</episodedetails>" >> "$nfo"
-tidy -w 150 -i -m -xml "$nfo" &>/dev/null
+tidy -w 2000 -i -m -xml "$nfo" &>/dev/null
 log "Processing :: $sonarrseriestitle :: Episdoe :: $sonarrepisodetitle :: Writing Complete"
 exit 0
