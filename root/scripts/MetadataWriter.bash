@@ -21,36 +21,17 @@ sonarrepisodefiledata="$(curl -s --header "X-Api-Key:"${apikey} --request GET  "
 sonarrepisodetvdbId="$(echo "$sonarrseriesdata" | jq -r ".tvdbId")"
 sonarrepisodeseasonnumber="$(echo "$sonarrepisodedata" | jq -r ".seasonNumber")"
 sonarrepisodenumber="$(echo "$sonarrepisodedata" | jq -r ".episodeNumber")"
-themoviedbid=$(curl -s "https://api.themoviedb.org/3/find/$sonarrepisodetvdbId?api_key=$themoviedbapikey&external_source=tvdb_id" | jq -r ".tv_results[].id")
-themoviedbshowdata=$(curl -s "https://api.themoviedb.org/3/tv/$themoviedbid?api_key=$themoviedbapikey" | jq -r ".")
-themoviedbshowvideos=$(curl -s "https://api.themoviedb.org/3/tv/$themoviedbid/videos?api_key=$themoviedbapikey" | jq -r ".")
-themoviedbshowcredits=$(curl -s "https://api.themoviedb.org/3/tv/$themoviedbid/aggregate_credits?api_key=$themoviedbapikey" | jq -r ".")
-themoviedbshowseasondata=$(curl -s "https://api.themoviedb.org/3/tv/$themoviedbid/season/${sonarrepisodeseasonnumber}?api_key=$themoviedbapikey" | jq -r ".")
-themoviedbshowseasonvideos=$(curl -s "https://api.themoviedb.org/3/tv/$themoviedbid/season/${sonarrepisodeseasonnumber}/videos?api_key=$themoviedbapikey" | jq -r ".")
-themoviedbshowepisodedata=$(curl -s "https://api.themoviedb.org/3/tv/$themoviedbid/season/${sonarrepisodeseasonnumber}/episode/${sonarrepisodenumber}?api_key=$themoviedbapikey" | jq -r ".")
-themoviedbshowepisodecredits=$(curl -s "https://api.themoviedb.org/3/tv/$themoviedbid//season/${sonarrepisodeseasonnumber}/episode/${sonarrepisodenumber}/credits?api_key=$themoviedbapikey" | jq -r ".")
 
-sonarrepisodetitle="$(echo "${sonarrepisodedata}" | jq -r ".title")"
-sonarrepisodeoverview="$(echo "$sonarrepisodedata" | jq -r ".overview")"
-sonarrepisodeairdate="$(echo "$sonarrepisodedata" | jq -r ".airDate")"
-sonarrseriestitle="$(echo "$sonarrseriesdata" | jq -r ".title")"
-sonarrepisodefile="$(echo "$sonarrepisodefiledata" | jq -r ".path")"
-sonarrepisoderuntime="$(echo "$sonarrepisodefiledata" | jq -r ".mediaInfo.runTime")"
-sonarrepisoderuntime=${sonarrepisoderuntime:0:2}
-sonarrepisodefolderpath="$(dirname "$sonarrepisodefile")"
-sonarrepisodefilename="$(basename "$sonarrepisodefile")"
-sonarrepisodefilenamenoext="${sonarrepisodefilename%.*}"
-sonarrepisodefilenamethumb="${sonarrepisodefile%.*}-thumb.jpg"
 sonarrshowpath="$(echo "$sonarrseriesdata" | jq -r ".path")"
 sonarrshowtitle="$(echo "$sonarrseriesdata" | jq -r ".title")"
-sonarrshowsorttitle="$(echo "$sonarrseriesdata" | jq -r ".sortTitle")"
+sonarrseriestitle="$(echo "$sonarrseriesdata" | jq -r ".title")"
+sonarrepisodetvdbId="$(echo "$sonarrseriesdata" | jq -r ".tvdbId")"
+sonarrseriestitle="$(echo "$sonarrseriesdata" | jq -r ".title")"
 sonarrshowmpaa="$(echo "$sonarrseriesdata" | jq -r ".certification")"
 sonarrshowoverview="$(echo "$sonarrseriesdata" | jq -r ".overview")"
 sonarrshowimdbid="$(echo "$sonarrseriesdata" | jq -r ".imdbId")"
 sonarrshowyear="$(echo "$sonarrseriesdata" | jq -r ".year")"
 sonarrshownetwork="$(echo "$sonarrseriesdata" | jq -r ".network")"
-sonarrseriespremiered="$(echo "${themoviedbshowdata}" | jq -r ".first_air_date")"
-sonarrseriesstatus="$(echo "${themoviedbshowdata}" | jq -r ".status")"
 sonarrshowlocalposter="MediaCover/${sonarrseriesid}/poster.jpg"
 sonarrshowposter=$(echo "${sonarrseriesdata}" | jq -r ".images[] | select(.coverType==\"poster\") | .remoteUrl")
 sonarrshowlocalfanart="MediaCover/${sonarrseriesid}/fanart.jpg"
@@ -60,38 +41,58 @@ sonarrshowbanner=$(echo "${sonarrseriesdata}" | jq -r ".images[] | select(.cover
 poster="$sonarrshowpath/poster.jpg"
 fanart="$sonarrshowpath/fanart.jpg"
 banner="$sonarrshowpath/banner.jpg"
-sonarrseriestagline="$(echo "${themoviedbshowdata}" | jq -r ".tagline")"
-OLDIFS="$IFS"
-IFS=$'\n'
-sonarrseriesgenres=($(echo "${themoviedbshowdata}" | jq -r ".genres[] | .name"))
-sonarrepisodedirectors=($(echo "${themoviedbshowepisodecredits}" | jq -r ".crew[] | select(.job==\"Director\") | .name"))
-sonarrepisodewriters=($(echo "${themoviedbshowepisodecredits}" | jq -r ".crew[] | select(.job==\"Writer\") | .name"))
-IFS="$OLDIFS"
-sonarrshowcast=($(echo "${themoviedbshowcredits}" | jq -r ".cast[] | .id"))
-sonarrshowseasons=($(echo "${themoviedbshowdata}" | jq -r ".seasons[] | .id"))
-sonarrepisodecast=($(echo "${themoviedbshowepisodecredits}" | jq -r ".cast[] | .id"))
-sonarrepisodeguestcast=($(echo "${themoviedbshowepisodecredits}" | jq -r ".guest_stars[] | .id"))
-sonarrepisodeid=$(echo "${themoviedbshowepisodedata}" | jq -r ".id")
-sonarrepisodethumb=$(echo "${themoviedbshowepisodedata}" | jq -r ".still_path")
 
+# Season Data
+# themoviedbshowseasondata=$(curl -s "https://api.themoviedb.org/3/tv/$themoviedbid/season/${sonarrepisodeseasonnumber}?api_key=$themoviedbapikey" | jq -r ".")
+# themoviedbshowseasonvideos=$(curl -s "https://api.themoviedb.org/3/tv/$themoviedbid/season/${sonarrepisodeseasonnumber}/videos?api_key=$themoviedbapikey" | jq -r ".")
+	
 nfo="$sonarrshowpath/tvshow.nfo"
+log "$mainprocessid of $sonarrseriesidscount :: Processing :: $sonarrseriestitle"
+if [  -f "$nfo" ]; then
+	if cat "$nfo" | grep "tmdb" | read; then
+		sleep 0.01
+		themoviedbid=$(cat "$nfo" | xq . | jq -r ".tvshow.uniqueid[] | select(.\"@type\"==\"tmdb\") | .\"#text\"")
+	else
+		touch -d "2 hours ago" "$nfo"
+		themoviedbid="unkown"
+	fi
 
-log "Processing :: $sonarrseriestitle"
-if cat "$nfo" | grep "tmdb" | read; then
-	sleep 0.01
-else
-	touch -d "2 hours ago" "$nfo" 
-fi
-
-if find "$nfo" -name "tvshow.nfo" -type f -mtime +30 | read; then
-	log "Processing :: $sonarrseriestitle :: Show :: NFO detected, removing..."
-	rm "$nfo"
-else
-	log "Processing :: $sonarrseriestitle :: Show :: Detected NFO doesn't require update..." 
+	if find "$nfo" -name "tvshow.nfo" -type f -mtime +30 | read; then
+		log "$mainprocessid of $sonarrseriesidscount :: Processing :: $sonarrseriestitle :: Show :: NFO detected, removing..."
+		rm "$nfo"
+	else
+		log "$mainprocessid of $sonarrseriesidscount :: Processing :: $sonarrseriestitle :: Show :: Detected NFO doesn't require update..." 
+	fi
 fi
 
 if [ ! -f "$nfo" ]; then
-	log "Processing :: $sonarrseriestitle :: Show :: Writing NFO..."
+
+	# Get show data from themoviedb via API
+	if [ "$themoviedbid" != "unknown" ]; then
+		themoviedbid=$(curl -s "https://api.themoviedb.org/3/find/$sonarrepisodetvdbId?api_key=$themoviedbapikey&external_source=tvdb_id" | jq -r ".tv_results[].id")
+	fi
+	themoviedbshowdata=$(curl -s "https://api.themoviedb.org/3/tv/$themoviedbid?api_key=$themoviedbapikey" | jq -r ".")
+	themoviedbshowcredits=$(curl -s "https://api.themoviedb.org/3/tv/$themoviedbid/aggregate_credits?api_key=$themoviedbapikey" | jq -r ".")
+	# themoviedbshowvideos=$(curl -s "https://api.themoviedb.org/3/tv/$themoviedbid/videos?api_key=$themoviedbapikey" | jq -r ".")
+	themoviedbshowdata=$(curl -s "https://api.themoviedb.org/3/tv/$themoviedbid?api_key=$themoviedbapikey" | jq -r ".")
+	themoviedbshowcredits=$(curl -s "https://api.themoviedb.org/3/tv/$themoviedbid/aggregate_credits?api_key=$themoviedbapikey" | jq -r ".")
+	
+	# Extract elements from API data
+	sonarrseriespremiered="$(echo "${themoviedbshowdata}" | jq -r ".first_air_date")"
+	sonarrseriesstatus="$(echo "${themoviedbshowdata}" | jq -r ".status")"
+	sonarrseriestagline="$(echo "${themoviedbshowdata}" | jq -r ".tagline")"
+	sonarrseriesepisodecount="$(echo "${themoviedbshowdata}" | jq -r ".number_of_episodes")"
+	minimumcount=$(( $sonarrseriesepisodecount*50/100 ))
+	OLDIFS="$IFS"
+	IFS=$'\n'
+	sonarrseriesgenres=($(echo "${themoviedbshowdata}" | jq -r ".genres[] | .name"))
+	IFS="$OLDIFS"
+	sonarrshowcast=($(echo "${themoviedbshowcredits}" | jq -r ".cast[] | select(.total_episode_count>=$minimumcount) | .id"))
+	sonarrshowseasons=($(echo "${themoviedbshowdata}" | jq -r ".seasons[] | .id"))
+	
+	# Write Show NFO
+	
+	log "$mainprocessid of $sonarrseriesidscount :: Processing :: $sonarrseriestitle :: Show :: Writing NFO..."
 
 	echo "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\" ?>" >> "$nfo"
 	echo "<tvshow>" >> "$nfo"
@@ -174,16 +175,47 @@ if [ ! -f "$nfo" ]; then
 	done
 	echo "</tvshow>" >> "$nfo"
 	tidy -w 2000 -i -m -xml "$nfo" &>/dev/null
+
 	if [ -f "$nfo" ]; then
-		log "Processing :: $sonarrseriestitle :: Show :: Writing Complete"
+		log "$mainprocessid of $sonarrseriesidscount :: Processing :: $sonarrseriestitle :: Show :: Writing Complete"
 	fi
 fi
+
+sonarrepisodeseasonnumber="$(echo "$sonarrepisodedata" | jq -r ".seasonNumber")"
+sonarrepisodenumber="$(echo "$sonarrepisodedata" | jq -r ".episodeNumber")"
+sonarrepisodetitle="$(echo "${sonarrepisodedata}" | jq -r ".title")"
+sonarrepisodeoverview="$(echo "$sonarrepisodedata" | jq -r ".overview")"
+sonarrepisodeairdate="$(echo "$sonarrepisodedata" | jq -r ".airDate")"
+sonarrepisodefile="$(echo "$sonarrepisodefiledata" | jq -r ".path")"
+sonarrepisoderuntime="$(echo "$sonarrepisodefiledata" | jq -r ".mediaInfo.runTime")"
+sonarrepisoderuntime=${sonarrepisoderuntime:0:2}
+sonarrepisodefolderpath="$(dirname "$sonarrepisodefile")"
+sonarrepisodefilename="$(basename "$sonarrepisodefile")"
+sonarrepisodefilenamenoext="${sonarrepisodefilename%.*}"
+sonarrepisodefilenamethumb="${sonarrepisodefile%.*}-thumb.jpg"	
 
 nfo="${sonarrepisodefolderpath}/${sonarrepisodefilenamenoext}.nfo"
 if [ -f "$nfo" ]; then
 	rm "$nfo"
 fi
-log "Processing :: $sonarrseriestitle :: Episode :: $sonarrepisodetitle :: Writing NFO..."
+
+# Episode data
+
+themoviedbshowepisodedata=$(curl -s "https://api.themoviedb.org/3/tv/$themoviedbid/season/${sonarrepisodeseasonnumber}/episode/${sonarrepisodenumber}?api_key=$themoviedbapikey" | jq -r ".")
+themoviedbshowepisodecredits=$(curl -s "https://api.themoviedb.org/3/tv/$themoviedbid/season/${sonarrepisodeseasonnumber}/episode/${sonarrepisodenumber}/credits?api_key=$themoviedbapikey" | jq -r ".")	
+OLDIFS="$IFS"
+IFS=$'\n'		
+sonarrepisodedirectors=($(echo "${themoviedbshowepisodecredits}" | jq -r ".crew[] | select(.job==\"Director\") | .name"))
+sonarrepisodewriters=($(echo "${themoviedbshowepisodecredits}" | jq -r ".crew[] | select(.job==\"Writer\") | .name"))
+IFS="$OLDIFS"
+sonarrepisodecast=($(echo "${themoviedbshowepisodecredits}" | jq -r ".cast[] | .id"))
+sonarrepisodeguestcast=($(echo "${themoviedbshowepisodecredits}" | jq -r ".guest_stars[] | .id"))
+sonarrepisodeid=$(echo "${themoviedbshowepisodedata}" | jq -r ".id")
+sonarrepisodethumb=$(echo "${themoviedbshowepisodedata}" | jq -r ".still_path")
+
+
+# Write Episode NFO
+log "$mainprocessid of $sonarrseriesidscount :: Processing :: $sonarrseriestitle :: Episode $episodeprocessid of $episodefileidscount :: $sonarrepisodetitle :: Writing NFO..."
 echo "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\" ?>" >> "$nfo"
 echo "<episodedetails>" >> "$nfo"
 echo "    <title>$sonarrepisodetitle</title>" >> "$nfo"
@@ -192,7 +224,7 @@ echo "    <userrating></userrating>" >> "$nfo"
 echo "    <season>$sonarrepisodeseasonnumber</season>" >> "$nfo"
 echo "    <episode>$sonarrepisodenumber</episode>" >> "$nfo"
 echo "    <plot>$sonarrepisodeoverview</plot>" >> "$nfo"
-# echo "    <runtime>$sonarrepisoderuntime</runtime>" >> "$nfo"
+#echo "    <runtime>$sonarrepisoderuntime</runtime>" >> "$nfo"
 if [ -f "$sonarrepisodefilenamethumb" ]; then
 	echo "    <thumb>${sonarrepisodefilenamenoext}-thumb.jpg</thumb>" >> "$nfo"
 else
@@ -254,5 +286,6 @@ for id in ${!sonarrepisodeguestcast[@]}; do
 done
 echo "</episodedetails>" >> "$nfo"
 tidy -w 2000 -i -m -xml "$nfo" &>/dev/null
-log "Processing :: $sonarrseriestitle :: Episdoe :: $sonarrepisodetitle :: Writing Complete"
+log "$mainprocessid of $sonarrseriesidscount :: Processing :: $sonarrseriestitle :: Episode $episodeprocessid of $episodefileidscount :: $sonarrepisodetitle :: Writing Complete"
+
 exit 0
