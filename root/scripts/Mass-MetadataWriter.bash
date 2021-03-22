@@ -147,6 +147,7 @@ for id in ${!sonarrseriesids[@]}; do
 			else
 				echo "	    <thumb>$sonarrshowfanart</thumb>" >> "$nfo"
 			fi
+			echo "	</fanart>" >> "$nfo"
 			echo "    <mpaa>$sonarrshowmpaa</mpaa>" >> "$nfo"
 			echo "    <uniqueid type=\"tvdb\" default=\"true\">$sonarrepisodetvdbId</uniqueid>" >> "$nfo"
 			echo "    <uniqueid type=\"tmdb\">$themoviedbid</uniqueid>" >> "$nfo"
