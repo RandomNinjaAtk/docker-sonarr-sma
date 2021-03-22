@@ -189,7 +189,7 @@ for id in ${!sonarrseriesids[@]}; do
 				echo "    <namedseason number=\"$seasonnumbere\">$seasonname</namedseason>" >> "$nfo"
 			done
 			echo "</tvshow>" >> "$nfo"
-			tidy -i -m -xml "$nfo" &>/dev/null
+			tidy -w 150 -i -m -xml "$nfo" &>/dev/null
 
 			if [ -f "$nfo" ]; then
 				log "$mainprocessid of $sonarrseriesidscount :: Processing :: $sonarrseriestitle :: Show :: Writing Complete"
@@ -270,7 +270,7 @@ for id in ${!sonarrseriesids[@]}; do
 			echo "	</actor>" >> "$nfo"
 		done
 		echo "</episodedetails>" >> "$nfo"
-		tidy -i -m -xml "$nfo" &>/dev/null
+		tidy -w 150 -i -m -xml "$nfo" &>/dev/null
 		log "$mainprocessid of $sonarrseriesidscount :: Processing :: $sonarrseriestitle :: Episode $episodeprocessid of $episodefileidscount :: $sonarrepisodetitle :: Writing Complete"
 
 	done
