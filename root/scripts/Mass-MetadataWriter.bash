@@ -50,6 +50,9 @@ for id in ${!sonarrseriesids[@]}; do
 		
 	nfo="$sonarrshowpath/tvshow.nfo"
 	log "$mainprocessid of $sonarrseriesidscount :: Processing :: $sonarrseriestitle"
+	if [ ! -d $"sonarrshowpath" ]; then
+		log "$mainprocessid of $sonarrseriesidscount :: Processing :: $sonarrseriestitle :: Show folder does not exist, skipping..."
+	fi
 	if [  -f "$nfo" ]; then
 		if cat "$nfo" | grep "tmdb" | read; then
 			sleep 0.01
