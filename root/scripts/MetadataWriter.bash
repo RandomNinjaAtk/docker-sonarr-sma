@@ -61,6 +61,7 @@ SeriesNFOWriter () {
 			rm "$nfo"
 		else
 			log "$mainprocessid of $sonarrseriesidscount :: Processing :: $sonarrseriestitle :: Show :: Detected NFO doesn't require update..."
+			return
 		fi
 	fi
 
