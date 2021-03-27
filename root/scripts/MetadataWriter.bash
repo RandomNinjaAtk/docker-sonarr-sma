@@ -116,7 +116,7 @@ SeriesNFOWriter () {
 		echo "	<plot>$sonarrshowoverview</plot>" >> "$nfo"
 		echo "	<tagline>$sonarrseriestagline</tagline>" >> "$nfo"
 		echo "	<runtime>$sonarr_series_runtime</runtime>" >> "$nfo"
-		echo "	<userrating></userrating>" >> "$nfo"
+		echo "	<userrating>0.0</userrating>" >> "$nfo"
 		if [ "$tmdb_poster_path" != "null" ]; then
 			echo "	<thumb aspect=\"poster\">https://image.tmdb.org/t/p/original$tmdb_poster_path</thumb>" >> "$nfo"
 		fi
@@ -136,6 +136,7 @@ SeriesNFOWriter () {
 		fi
 		echo "	</fanart>" >> "$nfo"
 		echo "	<mpaa>$sonarrshowmpaa</mpaa>" >> "$nfo"
+		echo "	<playcount/>" >> "$nfo"
 		# TinyMediaManager style
 		echo "	<episodeguide>" >> "$nfo"
 		echo "		<url cache=\"auth.json\" post=\"yes\">https://api.thetvdb.com/login?{\"apikey\":\"439DFEBA9D3059C6\",\"id\":$sonarrepisodetvdbId}|Content-Type=application/json</url>" >> "$nfo"
