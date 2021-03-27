@@ -341,7 +341,7 @@ for id in ${!sonarrseriesids[@]}; do
 	mainprocessid=$(( $id + 1 ))
 	sonarr_series_id="${sonarrseriesids[$id]}"
 	SeriesNFOWriter
-	continue
+	
 	# Begin Processing Episodes
 	for id in ${!episodefileids[@]}; do
 		episodeprocessid=$(( $id + 1 ))
