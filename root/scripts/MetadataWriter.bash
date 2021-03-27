@@ -262,10 +262,10 @@ EpisodeNFOWriter () {
 	echo "    <episode>$sonarrepisodenumber</episode>" >> "$nfo"
 	echo "    <plot>$sonarrepisodeoverview</plot>" >> "$nfo"
 	#echo "    <runtime>$sonarrepisoderuntime</runtime>" >> "$nfo"
-	if [ -f "$sonarrepisodefilenamethumb" ]; then
-		echo "    <thumb>${sonarrepisodefilenamenoext}-thumb.jpg</thumb>" >> "$nfo"
-	else
+	if [ ! "$sonarrepisodethumb" == null ]; then
 		echo "    <thumb>https://www.themoviedb.org/t/p/original/$sonarrepisodethumb</thumb>" >> "$nfo"
+	else
+		echo "    <thumb/>" >> "$nfo"
 	fi
 	echo "    <uniqueid type=\"tmdb\" default=\"true\">$sonarrepisodeid</uniqueid>" >> "$nfo"
 	for writer in ${!sonarrepisodewriters[@]}; do
@@ -295,7 +295,10 @@ EpisodeNFOWriter () {
 		echo "		<order>$order</order>" >> "$nfo"
 		if [ ! "$thumb" == null ]; then
 			echo "		<thumb>https://www.themoviedb.org/t/p/original${thumb}</thumb>" >> "$nfo"
+		else
+			echo "		<thumb/>" >> "$nfo"
 		fi
+		echo "		<profile>https://www.themoviedb.org/person/$castid</profile>" >> "$nfo"
 		echo "		<tmdbid>$castid</tmdbid>" >> "$nfo"
 		echo "	</actor>" >> "$nfo"
 	done
@@ -317,7 +320,10 @@ EpisodeNFOWriter () {
 		echo "		<order>$order</order>" >> "$nfo"
 		if [ ! "$thumb" == null ]; then
 			echo "		<thumb>https://www.themoviedb.org/t/p/original${thumb}</thumb>" >> "$nfo"
+		else
+			echo "		<thumb/>" >> "$nfo"
 		fi
+		echo "		<profile>https://www.themoviedb.org/person/$castid</profile>" >> "$nfo"
 		echo "		<tmdbid>$castid</tmdbid>" >> "$nfo"
 		echo "	</actor>" >> "$nfo"
 	done
