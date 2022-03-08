@@ -7,18 +7,14 @@ ENV SMA_APP Sonarr
 
 RUN \
 	echo "************ install packages ************" && \
-	apt-get update && \
-	apt-get install -y \
+	apk add  -U --update --no-cache \
+		jq \
 		git \
 		wget \
-		python3 \
-		python3-pip \
-		ffmpeg \
 		mkvtoolnix \
-		tidy \
-		cron && \
-	apt-get purge --auto-remove -y && \
-	apt-get clean && \
+		python3 \
+		py3-pip \
+		ffmpeg && \
 	echo "************ setup SMA ************" && \
 	echo "************ setup directory ************" && \
 	mkdir -p ${SMA_PATH} && \
@@ -35,10 +31,7 @@ RUN \
 	pip3 install -r ${SMA_PATH}/setup/requirements.txt && \
 	echo "************ install python packages ************" && \
 	python3 -m pip install --no-cache-dir -U \
-		yq && \
-	echo "************ setup cron ************" && \
-	service cron start && \
-	echo "* * * * *   root   bash /scripts/update.bash" >> "/etc/crontab"
+		yq 
 	
 WORKDIR /
 
