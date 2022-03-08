@@ -27,6 +27,7 @@ The architectures supported by this image are:
 | Tag | Description |
 | :----: | --- |
 | latest | Sonarr Develop + SMA + ffmpeg |
+| develop | Sonarr Develop + SMA + ffmpeg |
 | nightly | Sonarr Nightly + SMA + ffmpeg |
 
 
