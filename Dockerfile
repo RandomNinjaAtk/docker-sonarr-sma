@@ -1,4 +1,4 @@
-FROM linuxserver/sonarr:develop
+FROM linuxserver/sonarr:latest
 LABEL maintainer="RandomNinjaAtk"
 
 ENV SMA_PATH /usr/local/sma
