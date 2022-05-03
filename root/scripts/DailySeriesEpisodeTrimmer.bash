@@ -53,6 +53,7 @@ if [ $seriesType == daily ]; then
 		fi
 	done
 	# Refresh Series after changes
+	echo "$seriesTitle (ID:$episodeSeriesId) :: TYPE :: $seriesType :: Refresh Series"
 	refreshSeries=$(curl -s "http://localhost:8989/api/v3/command?apikey=$sonarrApiKey" -X POST --data-raw "{\"name\":\"RefreshSeries\",\"seriesId\":$episodeSeriesId}")
 fi
 
