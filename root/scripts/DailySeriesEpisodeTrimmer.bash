@@ -31,6 +31,7 @@ if [ $seriesType == daily ]; then
 	seriesEpisodeData=$(curl -s "http://localhost:8989/api/v3/episode?seriesId=$seriesId&apikey=$sonarrApiKey")
 	seriesEpisodeIds=$(echo "$seriesEpisodeData"| jq -r " . | sort_by(.airDate) | reverse | .[] | select(.hasFile==true) | .id")
 	processId=0
+	seriesRefreshRequired=false
 	for id in $seriesEpisodeIds; do
 		processId=$(( $processId + 1 ))
 		if [ $processId -gt 14 ]; then
@@ -49,14 +50,17 @@ if [ $seriesType == daily ]; then
 			# Delete downloaded episode if greater than 14 downloaded episodes
 			echo "$seriesTitle (ID:$episodeSeriesId) :: TYPE :: $seriesType :: S${episodeSeasonNumber}E${episodeNumber} :: $episodeAirDate :: $episodeTitle :: Deleted File ID :: $episodeFileId"
 			deleteFile=$(curl -s "http://localhost:8989/api/v3/episodefile/$episodeFileId?apikey=$sonarrApiKey" -X DELETE)
+			seriesRefreshRequired=true
 		else
 			# Skip if less than required 14 downloaded episodes exist
 			echo "$seriesTitle (ID:$episodeSeriesId) :: TYPE ::  $seriesType :: Skipping Episode ID :: $id"
 		fi
 	done
-	# Refresh Series after changes
-	echo "$seriesTitle (ID:$episodeSeriesId) :: TYPE :: $seriesType :: Refresh Series"
-	refreshSeries=$(curl -s "http://localhost:8989/api/v3/command?apikey=$sonarrApiKey" -X POST --data-raw "{\"name\":\"RefreshSeries\",\"seriesId\":$episodeSeriesId}")
+	if [ "$seriesRefreshRequired" = "true" ]; then
+		# Refresh Series after changes
+		echo "$seriesTitle (ID:$episodeSeriesId) :: TYPE :: $seriesType :: Refresh Series"
+		refreshSeries=$(curl -s "http://localhost:8989/api/v3/command?apikey=$sonarrApiKey" -X POST --data-raw "{\"name\":\"RefreshSeries\",\"seriesId\":$episodeSeriesId}")
+	fi
 fi
 
 exit
