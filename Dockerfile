@@ -34,7 +34,7 @@ RUN \
 	python3 -m pip install --no-cache-dir -U \
 		yq 
 	
-WORKDIR /
+WORKDIR /config
 
 # copy local files
 COPY root/ /
