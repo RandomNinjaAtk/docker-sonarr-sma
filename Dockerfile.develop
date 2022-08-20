@@ -7,14 +7,15 @@ ENV SMA_APP Sonarr
 
 RUN \
 	echo "************ install packages ************" && \
-	apk add  -U --update --no-cache \
-		jq \
+	apt-get update && \
+	apt-get install -y \
 		git \
 		wget \
-		mkvtoolnix \
 		python3 \
-		py3-pip \
-		ffmpeg && \
+		python3-pip \
+		ffmpeg \
+		mkvtoolnix \
+		tidy && \
 	echo "************ setup SMA ************" && \
 	echo "************ setup directory ************" && \
 	mkdir -p ${SMA_PATH} && \
