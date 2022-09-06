@@ -1,10 +1,12 @@
+# Deprecated
+
+This repository is now deprecated, will no longer be updated and is being archived. Please visit the new project/replacement:
+* [https://github.com/RandomNinjaAtk/docker-sonarr-extended](https://github.com/RandomNinjaAtk/docker-sonarr-extended)
+
+<br />
+<br />
 
 # [RandomNinjaAtk/sonarr-sma](https://github.com/RandomNinjaAtk/docker-sonarr-sma)
-[![Docker Build](https://img.shields.io/docker/cloud/automated/randomninjaatk/sonarr-sma?style=flat-square)](https://hub.docker.com/r/randomninjaatk/sonarr-sma)
-[![Docker Pulls](https://img.shields.io/docker/pulls/randomninjaatk/sonarr-sma?style=flat-square)](https://hub.docker.com/r/randomninjaatk/sonarr-sma)
-[![Docker Stars](https://img.shields.io/docker/stars/randomninjaatk/sonarr-sma?style=flat-square)](https://hub.docker.com/r/randomninjaatk/sonarr-sma)
-[![Docker Hub](https://img.shields.io/badge/Open%20On-DockerHub-blue?style=flat-square)](https://hub.docker.com/r/randomninjaatk/sonarr-sma)
-[![Discord](https://img.shields.io/discord/747100476775858276.svg?style=flat-square&label=Discord&logo=discord)](https://discord.gg/JumQXDc "realtime support / chat with the community." )
 
 [Sonarr](https://sonarr.tv/) is a PVR for usenet and bittorrent users. It can monitor multiple RSS feeds for new episodes of your favorite shows and will grab, sort and rename them. It can also be configured to automatically upgrade the quality of files already downloaded when a better quality format becomes available.
 
